@@ -115,9 +115,13 @@ namespace NoteTakingApp
         {
             try
             {
+                // Get the directory where the executable is located
+                string executablePath = AppContext.BaseDirectory;
+
                 bool fileExists = File.Exists(notePath);
-                
-                if (!string.IsNullOrEmpty(templatePath) && File.Exists(templatePath))
+                templatePath = Path.Combine(executablePath, templatePath);
+
+                if (File.Exists(templatePath))
                 {
                     string template = File.ReadAllText(templatePath);
                     string content = template
