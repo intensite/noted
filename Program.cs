@@ -90,19 +90,6 @@ namespace NoteTakingApp
                 Directory.CreateDirectory(fullCategoryPath);
             }
 
-            // // Create Note if it doesn't exist
-            // if (!File.Exists(notePath))
-            // {
-            //     CreateNote(notePath, templatePath, noteText);
-            //     Console.WriteLine($"Created new note: {notePath}");
-            // }
-
-            // // Append Text to Note
-            // if (!string.IsNullOrEmpty(noteText))
-            // {
-            //     AppendTextToNote(notePath, noteText);
-            // }
-
             // Create or append note
             CreateNote(notePath, templatePath, noteText);
 
@@ -114,8 +101,11 @@ namespace NoteTakingApp
 
         static void LoadConfiguration()
         {
+            // Get the directory where the executable is located
+            string executablePath = AppContext.BaseDirectory;
+            
             var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
+                .SetBasePath(executablePath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
             Configuration = builder.Build();
